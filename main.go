@@ -14,10 +14,19 @@ func main(){
 			case "GET":
 				s := rq.URL.Query().Get("bidang")
 				if (s!="") {
-					log.Printf("port inventaris")
+					//do nothing
 				} else {
 					GetAllBarang(rw, rq)
 				}
+			default:
+				http.Error(rw,"invalid",405)
+		}
+	})
+
+	http.HandleFunc("/kineklub", func(rw http.ResponseWriter, rq *http.Request) {
+		switch rq.Method {
+			case "GET":
+				GetBarangKineklub(rw, rq)
 			default:
 				http.Error(rw,"invalid",405)
 		}
