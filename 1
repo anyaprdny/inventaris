@@ -1,0 +1,83 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
+
+
+func main(){
+	port := 9009
+
+	http.HandleFunc("/barang/", func(rw http.ResponseWriter, rq *http.Request) {
+		switch rq.Method {
+			case "GET":
+				s := rq.URL.Query().Get("bidang")
+				if (s != "") {
+					if s == "kineklub" {
+						GetBarangKineklub(rw, rq)
+					} else if s == "videografi" {
+						GetBarangVideografi(rw, rq)
+					} else if s == "doksos" {
+						GetBarangDoksos(rw, rq)
+					} else if s == "danus" {
+						GetBarangDanus(rw, rq)
+					} else if s == "bk" {
+						GetBarangBK(rw, rq)
+					} else if s == "fotografi" {
+						GetBarangFotografi(rw, rq)
+					} else if s == "brt" {
+						GetBarangBRT(rw, rq)
+					} 
+				} else {
+					GetAllBarang(rw, rq)
+				}
+			default:
+				http.Error(rw,"invalid",405)
+		}
+	})
+	
+	//Kondisi Barang
+	http.HandleFunc("/kondisi_barang/", func(rw http.ResponseWriter, rq *http.Request) {
+		switch rq.Method {
+			case "GET":
+				s := rq.URL.Query().Get("kondisi")
+				if s != "" {
+					GetKondisiBarang(rw, rq, s)
+				} else {
+					GetAllBarang(rw, rq)
+				}
+			default:
+				http.Error(rw,"invalid",405)
+		}
+	})
+
+	//Lokasi Barang
+	http.HandleFunc("/lokasi_barang/", func(rw http.ResponseWriter, rq *http.Request) {
+		switch rq.Method {
+			case "GET":
+				s := rq.URL.Query().Get("lokasi")
+				if (s != "") {
+					log.Printf(s)
+					GetLokasiBarang(rw, rq, s)
+				} else {
+					GetAllBarang(rw, rq)
+				}
+			default:
+				http.Error(rw,"invalid",405)
+		}
+	})
+	
+	http.HandleFunc("/barang/post", func(rw http.ResponseWriter, rq *http.Request) { 
+		switch rq.Method {
+			case "POST":
+				PostBarang(rw, rq)
+			default:
+				http.Error(rw,"invalid",405)
+		}
+	})
+	log.Printf("Server starting on port %v\n",port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v",port),nil))
+}
+

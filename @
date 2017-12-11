@@ -1,0 +1,409 @@
+package main
+
+import (
+	"net/http"
+	"encoding/json"
+	"database/sql"
+	"log"
+	_ "github.com/go-sql-driver/mysql"
+)
+
+func GetAllBarang(rw http.ResponseWriter, rq *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer rows.Close()
+
+	//Scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil{
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+
+func GetBarangBidang(rw http.ResponseWriter, rq *http.Request, bidang string) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like?","%"+bidang+"%")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil{
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+ 
+func GetKondisiBarang(rw http.ResponseWriter, rq *http.Request, kondisi string) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+	
+	barang := barang{}
+	
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kondisi like?","%"+kondisi+"%")
+	
+	if err != nil{
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil {
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+
+func GetLokasiBarang(rw http.ResponseWriter, rq *http.Request, lokasi string) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Lokasi like?","%"+lokasi+"%") 
+	log.Printf(lokasi)
+	
+	if err != nil{
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		
+		if err != nil {
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+
+func GetBarangKineklub(rw http.ResponseWriter, rq *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	//search with query bidang kineklub
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like '%KN%'")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//Scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil{
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+
+func GetBarangVideografi(rw http.ResponseWriter, rq *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	//search with query bidang videografi
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like '%VD%'")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//Scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil{
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+
+}
+
+func GetBarangDoksos(rw http.ResponseWriter, rq *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	//search with query doksos
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like '%DS%'")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil{
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+
+}
+func GetBarangDanus(rw http.ResponseWriter, rq *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+	
+	//search with query danus
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like '%DU%'")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil{
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+
+func GetBarangBK(rw http.ResponseWriter, rq *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	//search with query bk
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like '%BK%'")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil{
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+func GetBarangFotografi(rw http.ResponseWriter, rq *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	//search with query fotografi
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like '%FT%'")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil {
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+
+func GetBarangBRT(rw http.ResponseWriter, rq *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	barang := barang{}
+
+	//search with query brt
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like '%RT%'")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil {
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+
+func GetKodeBarang(rw http.ResponseWriter, rq *http.Request, kode string) {
+	db , err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rq.Body.Close()
+
+	barang := barang{}
+
+	rows, err := db.Query("select Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like?",kode)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	//scan data from table
+	for rows.Next() {
+		err := rows.Scan(&barang.Kode_Barang, &barang.Nama_Barang, &barang.Kondisi, &barang.Lokasi)
+		if err != nil {
+			log.Fatal(err)
+		}
+		json.NewEncoder(rw).Encode(&barang)
+	}
+}
+
+func PostBarang (rw http.ResponseWriter, rq *http.Request) {
+	var brg barang
+	brgDecoder := json.NewDecoder(rq.Body)
+	err := brgDecoder.Decode(&brg)
+
+	if err != nil{
+		log.Fatal(err)
+	}
+	defer rq.Body.Close()
+
+	db , err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil{
+		log.Fatal(err)
+	}
+	
+	st, err := db.Prepare("INSERT INTO barang (Kode_Barang, Nama_Barang, Kondisi, Lokasi) VALUES (?,?,?,?)")
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = st.Exec(brg.Kode_Barang, brg.Nama_Barang, brg.Kondisi, brg.Lokasi)
+}
+
+func UpdateBarang(rw http.ResponseWriter, rq *http.Request, Kode_Barang string)  {
+	var brg barang
+	kb := Kode_Barang
+	brgDecoder := json.NewDecoder(rq.Body)
+	err := brgDecoder.Decode(&brg)
+
+	if err != nil{
+		log.Fatal(err)
+	}
+	defer rq.Body.Close()
+
+	db ,  err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	st, err := db.Prepare("UPDATE barang SET Kondisi = ? where Kode_Barang like ?")
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	_, err = st.Exec(brg.Kondisi, kb)
+}
+
+func DeleteBarang(rw http.ResponseWriter, rq *http.Request, Kode_Barang string) {
+	var brg barang
+	kb := Kode_Barang
+	brgDecoder := json.NewDecoder(rq.Body)
+	err := brgDecoder.Decode(&brg)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rq.Body.Close()
+
+	db , err := sql.Open("mysql",
+		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	st, err := db.Prepare("DELETE Kode_Barang, Nama_Barang, Kondisi, Lokasi from barang where Kode_Barang like ?")
+	if err != nil{
+		log.Fatal(err)
+	}
+	
+	_, err = st.Exec(brg.Kode_Barang, brg.Nama_Barang, brg.Kondisi, brg.Lokasi, kb)
+	defer db.Close()
+}
+	
