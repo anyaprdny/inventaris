@@ -12,7 +12,7 @@ import (
 //Fungsi untuk mendapatkan seluruh barang yang ada dalam inventaris 
 func GetAllBarang(rw http.ResponseWriter, rq *http.Request) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 
 	if err != nil {
 		log.Fatal(err)
@@ -42,7 +42,7 @@ func GetAllBarang(rw http.ResponseWriter, rq *http.Request) {
 //Fungsi untuk menampilkan barang inventaris sesuai bidang
 func GetBarangBidang(rw http.ResponseWriter, rq *http.Request, bidang string) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -69,7 +69,7 @@ func GetBarangBidang(rw http.ResponseWriter, rq *http.Request, bidang string) {
 //Fungsi untuk menampilkan barang sesuai dengan nama barang
 func GetNamaBarang(rw http.ResponseWriter, rq *http.Request, nama string) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -97,7 +97,7 @@ func GetNamaBarang(rw http.ResponseWriter, rq *http.Request, nama string) {
 //Fungsi untuk menampilkan barang sesuai kondisi barang
 func GetKondisiBarang(rw http.ResponseWriter, rq *http.Request, kondisi string) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -124,7 +124,7 @@ func GetKondisiBarang(rw http.ResponseWriter, rq *http.Request, kondisi string) 
 //Fungsi untuk menampilkan kondisi barang sesuai dengan input kode barang
 func GetKondisiByKodeBarang(rw http.ResponseWriter, rq *http.Request, kodebarang string) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -154,7 +154,7 @@ func GetKondisiByKodeBarang(rw http.ResponseWriter, rq *http.Request, kodebarang
 //Fungsi untuk menampilkan barang sesuai dengan lokasi barang
 func GetLokasiBarang(rw http.ResponseWriter, rq *http.Request, lokasi string) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -182,7 +182,7 @@ func GetLokasiBarang(rw http.ResponseWriter, rq *http.Request, lokasi string) {
 
 func GetBarangKineklub(rw http.ResponseWriter, rq *http.Request) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -209,7 +209,7 @@ func GetBarangKineklub(rw http.ResponseWriter, rq *http.Request) {
 
 func GetBarangVideografi(rw http.ResponseWriter, rq *http.Request) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -237,7 +237,7 @@ func GetBarangVideografi(rw http.ResponseWriter, rq *http.Request) {
 
 func GetBarangDoksos(rw http.ResponseWriter, rq *http.Request) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -264,7 +264,7 @@ func GetBarangDoksos(rw http.ResponseWriter, rq *http.Request) {
 }
 func GetBarangDanus(rw http.ResponseWriter, rq *http.Request) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -291,7 +291,7 @@ func GetBarangDanus(rw http.ResponseWriter, rq *http.Request) {
 
 func GetBarangBK(rw http.ResponseWriter, rq *http.Request) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -317,7 +317,7 @@ func GetBarangBK(rw http.ResponseWriter, rq *http.Request) {
 }
 func GetBarangFoto(rw http.ResponseWriter, rq *http.Request) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -344,7 +344,7 @@ func GetBarangFoto(rw http.ResponseWriter, rq *http.Request) {
 
 func GetBarangBRT(rw http.ResponseWriter, rq *http.Request) {
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -372,7 +372,7 @@ func GetBarangBRT(rw http.ResponseWriter, rq *http.Request) {
 //Fungsi untuk menampilkan barang inventaris sesuai dengan kode barang
 func GetKodeBarang(rw http.ResponseWriter, rq *http.Request, kode string) {
 	db , err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -409,7 +409,7 @@ func PostBarang (rw http.ResponseWriter, rq *http.Request) {
 	defer rq.Body.Close()
 
 	db , err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil{
 		log.Fatal(err)
 	}
@@ -435,7 +435,7 @@ func UpdateKondisi(rw http.ResponseWriter, rq *http.Request, Kode_Barang string)
 	defer rq.Body.Close()
 
 	db ,  err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil{
 		log.Fatal(err)
 	}
@@ -462,7 +462,7 @@ func UpdateLokasi(rw http.ResponseWriter, rq *http.Request, Kode_Barang string) 
 	defer rq.Body.Close()
 
 	db, err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil{
 		log.Fatal(err)
 	}
@@ -480,7 +480,7 @@ func UpdateLokasi(rw http.ResponseWriter, rq *http.Request, Kode_Barang string) 
 func DeleteBarang(rw http.ResponseWriter, rq *http.Request, Kode_Barang string) {
 	 
 	db , err := sql.Open("mysql",
-		"root:14july98@tcp(127.0.0.1:3306)/inventaris")
+		"root:14july98@tcp(127.0.0.1:3306)/inventarislfm")
 	if err != nil {
 		log.Fatal(err)
 	}
